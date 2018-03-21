@@ -28,6 +28,9 @@
 </template>
 
 <style lang="scss">
+    body{
+        margin: 0;
+    }
     .app{
         position: absolute;
         width: 100%;

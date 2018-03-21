@@ -1,14 +1,12 @@
 <template>
-  <div class="indexwrap">
-      <UserInfo></UserInfo>
-      <IndexInfo></IndexInfo>
+  <div class="userinfowrap">
+      
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import UserInfo from './userinfo.vue';
-import IndexInfo from './indexinfo.vue';
+
 // import util from '../../public/lib/util.js';
 
 export default {
@@ -25,7 +23,6 @@ export default {
         }),
     },
     components: {
-        UserInfo, IndexInfo,
     },
     methods: {
 
@@ -47,9 +44,8 @@ $font_size : 108;
     @return $pixels / $font_size + rem;
 }
 
-.indexwrap{
-    background: url('./images/bg.jpg') no-repeat;
-    background-size: 100% auto;
-    height: rem(5016);
+.userinfowrap{
+    position: relative;
+    height: rem(1980);
 }
 </style>
