@@ -39,8 +39,8 @@
           </div>
           <div class="userinfowrap-table-btwrap">
               <div class="bt-like">300</div>
-              <div class="bt-left">明星排行榜</div>
-              <div class="bt-right">我也要玩</div>
+              <router-link class="bt-left" to="/rank">明星排行榜</router-link>
+              <router-link class="bt-right" to="/upload">我也要玩</router-link>
           </div>
       </div>
   </div>
@@ -98,7 +98,7 @@ $font_size : 108;
 
 .userinfowrap{
     position: relative;
-    height: rem(1980);
+    height: rem(2100);
     &-table{
         position: absolute;
         top: rem(1120);
@@ -146,6 +146,7 @@ $font_size : 108;
                 top: rem(280);
                 left: rem(170);
                 border-radius: rem(80);
+                text-decoration: none;
                 &:active{
                     opacity: 0.8;
                 }
@@ -162,6 +163,7 @@ $font_size : 108;
                 top: rem(280);
                 right: rem(170);
                 border-radius: rem(80);
+                text-decoration: none;
                 &:active{
                     opacity: 0.8;
                 }

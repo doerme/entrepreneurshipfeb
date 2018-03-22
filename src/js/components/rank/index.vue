@@ -1,5 +1,5 @@
 <template>
-  <div class="indexinfowrap">
+  <div class="rankwrap">
       
   </div>
 </template>
@@ -44,11 +44,13 @@ $font_size : 108;
     @return $pixels / $font_size + rem;
 }
 
-.indexinfowrap{
-    position: relative;
-    height: rem(2730);
+.rankwrap{
+    position: absolute;
     width: 100%;
-    background: url('./images/content_wrap_bg.jpg') no-repeat;
+    height: rem(2333);
+    left: 0;
+    top: 0;
+    background: #090e30 url('./images/rank_bg.jpg') no-repeat;
     background-size: 100% auto; 
 }
 </style>

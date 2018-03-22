@@ -1,9 +1,13 @@
 <script>
     import VueRouter from '../public/lib/vue-router.js';
     import IndexView from './index/index.vue';
+    import RankView from './rank/index.vue';
+    import UploadView from './upload/index.vue';
 
     const routes = [
         { path: '/', component: IndexView },
+        { path: '/upload', component: UploadView },
+        { path: '/rank', component: RankView },
         { path: '*', redirect: '/' },
     ];
 
