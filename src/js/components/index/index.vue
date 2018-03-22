@@ -51,5 +51,7 @@ $font_size : 108;
     background: url('./images/bg.jpg') no-repeat;
     background-size: 100% auto;
     height: rem(5016);
+    width: 100%;
+    overflow-x: hidden;
 }
 </style>

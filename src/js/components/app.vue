@@ -37,6 +37,7 @@
         height: 100%;
         left: 0;
         top: 0;
+        overflow-x: hidden; 
         &-contain{
             position: absolute;
             top: 80px;

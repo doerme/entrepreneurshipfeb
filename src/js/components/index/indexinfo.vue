@@ -1,6 +1,6 @@
 <template>
   <div class="indexinfowrap">
-
+      
   </div>
 </template>
 
