@@ -1,7 +1,57 @@
 <template>
-  <div class="rankwrap">
-      
-  </div>
+    <div class="rankwrap">
+        <div class="user-avatar">
+            <img class="user-avatar-main" src="./images/avatar_eg.png" />
+        </div>
+        <div class="user-likenum"><span>陈小爱</span><span>982赞</span></div>
+        <ul class="rank-list">
+            <li>
+                <img class="rank-avatar" src="./images/avatar_eg.png" />
+                <span class="rank-name">露台</span>
+                <span class="rank-num">888赞</span>
+            </li>
+            <li>
+                <img class="rank-avatar" src="./images/avatar_eg.png" />
+                <span class="rank-name">露台</span>
+                <span class="rank-num">888赞</span>
+            </li>
+            <li>
+                <img class="rank-avatar" src="./images/avatar_eg.png" />
+                <span class="rank-name">露台</span>
+                <span class="rank-num">888赞</span>
+            </li>
+            <li>
+                <img class="rank-avatar" src="./images/avatar_eg.png" />
+                <span class="rank-name">露台</span>
+                <span class="rank-num">888赞</span>
+            </li>
+            <li>
+                <img class="rank-avatar" src="./images/avatar_eg.png" />
+                <span class="rank-name">露台</span>
+                <span class="rank-num">888赞</span>
+            </li>
+            <li>
+                <img class="rank-avatar" src="./images/avatar_eg.png" />
+                <span class="rank-name">露台</span>
+                <span class="rank-num">888赞</span>
+            </li>
+            <li>
+                <img class="rank-avatar" src="./images/avatar_eg.png" />
+                <span class="rank-name">露台</span>
+                <span class="rank-num">888赞</span>
+            </li>
+            <li>
+                <img class="rank-avatar" src="./images/avatar_eg.png" />
+                <span class="rank-name">露台</span>
+                <span class="rank-num">888赞</span>
+            </li>
+            <li>
+                <img class="rank-avatar" src="./images/avatar_eg.png" />
+                <span class="rank-name">露台</span>
+                <span class="rank-num">888赞</span>
+            </li>
+        </ul>
+    </div>
 </template>
 
 <script>
@@ -51,6 +101,70 @@ $font_size : 108;
     left: 0;
     top: 0;
     background: #090e30 url('./images/rank_bg.jpg') no-repeat;
-    background-size: 100% auto; 
+    background-size: 100% auto;
+    .rank-list{
+        position: absolute;
+        left: 50%;
+        top: rem(700);
+        transform: translateX(-50%);
+        width: rem(630);
+        li{
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            height: rem(170);
+            line-height: rem(170);
+        }
+        .rank-avatar{
+            width: rem(135);
+            height: rem(135);
+            border-radius: 50%;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .rank-name{
+            font-size: rem(42);
+            color: #FFF;
+            display: inline-block;
+            vertical-align: middle;
+            width: rem(320);
+            text-indent: rem(50);
+        }
+        .rank-num{
+            font-size: rem(42);
+            color: #FFF;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+    .user-avatar{
+        position: absolute;
+        left: 50%;
+        top: rem(240);
+        transform: translateX(-50%);
+        width: rem(382);
+        height: rem(382);
+        background: url('./images/avatar_wrap.png') no-repeat;
+        background-size: 100% auto;
+        &-main{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: rem(316);
+            height: rem(316);
+            border-radius: 50%;
+        }
+    }
+    .user-likenum{
+        position: absolute;
+        width: 100%;
+        top: rem(630);
+        left: 0;
+        width: 100%;
+        text-align: center;
+        font-size: rem(48);
+        color: #FFF;
+    }
 }
 </style>
