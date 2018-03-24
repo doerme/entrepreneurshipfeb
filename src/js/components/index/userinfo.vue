@@ -98,7 +98,7 @@ $font_size : 108;
 
 .userinfowrap{
     position: relative;
-    height: rem(2100);
+    height: rem(2200);
     &-table{
         position: absolute;
         top: rem(1120);

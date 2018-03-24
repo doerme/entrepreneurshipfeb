@@ -92,7 +92,7 @@ $font_size : 108;
     position: relative;
     background: #1d243e url('./images/bg.jpg') no-repeat;
     background-size: 100% auto;
-    height: rem(5200);
+    height: rem(5300);
     width: 100%;
     overflow-x: hidden;
 }
