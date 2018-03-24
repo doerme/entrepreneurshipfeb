@@ -1,6 +1,6 @@
 <template>
   <div class="loadingwrap">
-      <div class="loadingwrap-nick">陈大爱</div>
+      <div class="loadingwrap-nick" @click.stop="takeScreenshot">陈大爱</div>
       <div class="loadingwrap-remind">1号主管值正在加速检测中.....</div>
       <img class="loadingwrap-main-male" src="./images/male.png" />
       <img class="loadingwrap-scan" src="./images/scan.png" />
@@ -28,7 +28,12 @@ export default {
     components: {
     },
     methods: {
-
+        takeScreenshot() {
+            console.log('test');
+            html2canvas(document.getElementById('viewscan')).then(canvas => { // eslint-disable-line
+                document.body.appendChild(canvas);
+            });
+        },
     },
     watch: {
 

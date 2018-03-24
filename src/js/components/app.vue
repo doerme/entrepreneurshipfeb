@@ -29,7 +29,7 @@
         <li class="nav__item"><router-link to="/room">room</router-link></li>
         <li class="nav__item"><router-link to="/person">person</router-link></li>
     </ul> -->
-  <router-view class="content"></router-view>
+  <router-view class="content" id="viewscan"></router-view>
 </div>
 </template>
 
