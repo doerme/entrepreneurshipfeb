@@ -3,11 +3,13 @@
     import IndexView from './index/index.vue';
     import RankView from './rank/index.vue';
     import UploadView from './upload/index.vue';
+    import Loading from './loading/index.vue';
 
     const routes = [
         { path: '/', component: IndexView },
         { path: '/upload', component: UploadView },
         { path: '/rank', component: RankView },
+        { path: '/loading', component: Loading },
         { path: '*', redirect: '/' },
     ];
 

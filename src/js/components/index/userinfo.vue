@@ -224,6 +224,7 @@ $font_size : 108;
         position: absolute;
         left: 50%;
         transform-origin: center;
+        pointer-events: none;
     }
     &-q1{
         top: rem(98);

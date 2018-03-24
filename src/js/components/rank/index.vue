@@ -121,6 +121,7 @@ $font_size : 108;
             border-radius: 50%;
             display: inline-block;
             vertical-align: middle;
+            object-fit: cover;
         }
         .rank-name{
             font-size: rem(42);
