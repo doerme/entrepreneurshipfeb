@@ -1,8 +1,9 @@
 <template>
   <div class="loadingwrap">
-      <div class="loadingwrap-nick" @click.stop="takeScreenshot">陈大爱</div>
+      <div class="loadingwrap-nick">陈大爱</div>
       <div class="loadingwrap-remind">1号主管值正在加速检测中.....</div>
-      <img class="loadingwrap-main-male" src="./images/male.png" />
+      <img v-show="usersex === 1" class="loadingwrap-main-male" src="./images/male.png" />
+      <img v-show="usersex === 2" class="loadingwrap-main-female" src="./images/female.png" />
       <img class="loadingwrap-scan" src="./images/scan.png" />
   </div>
 </template>
@@ -23,6 +24,7 @@ export default {
     },
     computed: {
         ...mapGetters({
+            usersex: 'usersex',
         }),
     },
     components: {

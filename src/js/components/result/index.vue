@@ -16,6 +16,7 @@
             <div class="snapshowview-remind">扫描二维码了解详细，帮我点赞</div>
             <img class="uploadimage" :src="dataurl" />
         </div>
+        <img class="resultimg" :src="resultImgSrc" />
         <div class="takesnap-bt">长按保存我的数据</div>
     </div>
 </template>
@@ -31,7 +32,7 @@ export default {
     },
     data() {
         return {
-
+            resultImgSrc: null,
         };
     },
     computed: {
@@ -42,13 +43,20 @@ export default {
     components: {
     },
     methods: {
-
+        takeScreenshot() {
+            const self = this;
+            console.log('test');
+            html2canvas(document.getElementById('snapshowview')).then(canvas => { // eslint-disable-line
+                document.body.appendChild(canvas);
+                self.resultImgSrc = canvas.toDataURL();
+            });
+        },
     },
     watch: {
-
     },
     mounted() {
-
+        console.log('mounted result');
+        this.takeScreenshot();
     },
 };
 </script>
@@ -67,8 +75,24 @@ $font_size : 108;
     width: 100%;
     background: #232b3a url('./images/bg.jpg') no-repeat;
     background-size: 100% auto;
+    .resultimg{
+        position: absolute;
+        left: 0;
+        width: 100%;
+        z-index: 8;
+    }
+    .uploadimage{
+        position: absolute;
+        width: rem(470);
+        height: rem(470);
+        left: 50%;
+        transform: translateX(-49%);
+        top: rem(482);
+        border-radius: 50%;
+    }
     .takesnap-bt{
         position: absolute;
+        z-index: 8;
         left: 50%;
         transform: translateX(-50%);
         width: rem(430);
@@ -93,6 +117,8 @@ $font_size : 108;
         position: absolute;
         width: 100%;
         height: 100%;
+        background: #232b3a url('./images/bg.jpg') no-repeat;
+        background-size: 100% auto;
         &-note{
             position: absolute;
             width: rem(800);

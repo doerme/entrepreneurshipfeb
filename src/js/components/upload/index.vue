@@ -82,7 +82,7 @@ export default {
             const reader = new FileReader();
             reader.onloadend = function () {
                 const dataURL = reader.result;
-                console.log('dataURL', dataURL);
+                // console.log('dataURL', dataURL);
                 self.$store.dispatch('setDataUrl', dataURL);
             };
             reader.readAsDataURL(file); // 读出 base64
