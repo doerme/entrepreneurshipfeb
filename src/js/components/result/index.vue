@@ -1,22 +1,22 @@
 <template>
     <div class="resultwrap">
-        <div v-show="true" class="snapshowview" id="snapshowview">
+        <div v-show="snapshowviewShow" class="snapshowview" id="snapshowview">
             <div class="snapshowview-title">1号主管数据分析</div>
-            <div class="snapshowview-percent">92<span>%</span></div>
+            <div class="snapshowview-percent">{{userinfo.data.zhuguanzhi.replace('%','')}}<span>%</span></div>
             <div class="snapshowview-subtitle">1号主管值</div>
-            <div class="snapshowview-v1 pv">学习能力 93%</div>
-            <div class="snapshowview-v2 pv">沟通能力 93%</div>
-            <div class="snapshowview-v3 pv">自信心 93%</div>
-            <div class="snapshowview-v4 pv">技能 93%</div>
-            <div class="snapshowview-v5 pv">执行力 93%</div>
-            <div class="snapshowview-v6 pv">意志力 93%</div>
-            <div class="snapshowview-v7 pv">创新 93%</div>
-            <div class="snapshowview-note">陈小爱，你的自信心爆表，2018创业会找的就是你，加入我们吧!</div>
+            <div class="snapshowview-v1 pv">学习能力 {{userinfo.data.xuexinengli}}</div>
+            <div class="snapshowview-v2 pv">沟通能力 {{userinfo.data.goutongnengli}}</div>
+            <div class="snapshowview-v3 pv">自信心 {{userinfo.data.zixinxin}}</div>
+            <div class="snapshowview-v4 pv">技能 {{userinfo.data.jineng}}</div>
+            <div class="snapshowview-v5 pv">执行力 {{userinfo.data.zhixingli}}</div>
+            <div class="snapshowview-v6 pv">意志力 {{userinfo.data.yizhili}}</div>
+            <div class="snapshowview-v7 pv">创新 {{userinfo.data.chuangxin}}</div>
+            <div class="snapshowview-note">{{userinfo.sentence}}</div>
             <img class="snapshowview-qrcode" src="./images/qrcode.png" />
             <div class="snapshowview-remind">扫描二维码了解详细，帮我点赞</div>
-            <img class="uploadimage" :src="dataurl" />
+            <img class="uploadimage" :src="userinfo.img" />
         </div>
-        <img v-show="false" class="resultimg" :src="resultImgSrc" />
+        <img v-show="true" class="resultimg" :src="resultImgSrc" />
         <div class="takesnap-bt">长按保存我的数据</div>
     </div>
 </template>
@@ -39,6 +39,7 @@ export default {
     computed: {
         ...mapGetters({
             dataurl: 'dataurl',
+            userinfo: 'userinfo',
         }),
     },
     components: {
@@ -47,7 +48,10 @@ export default {
         takeScreenshot() {
             const self = this;
             console.log('takeScreenshot');
-            html2canvas(document.getElementById('snapshowview')).then(canvas => { // eslint-disable-line
+            html2canvas(document.getElementById('snapshowview'), { // eslint-disable-line
+                useCORS: true,
+                logging: true,
+            }).then((canvas) => {
                 document.body.appendChild(canvas);
                 self.resultImgSrc = canvas.toDataURL();
                 self.snapshowviewShow = false;
@@ -58,7 +62,11 @@ export default {
     },
     mounted() {
         console.log('mounted result');
-        this.takeScreenshot();
+        const coverImg = new Image();
+        coverImg.src = this.userinfo.img;
+        coverImg.onload = () => {
+            this.takeScreenshot();
+        };
     },
 };
 </script>

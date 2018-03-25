@@ -1,26 +1,26 @@
 <template>
   <div class="userinfowrap">
-      <img class="userinfowrap-userface" src="wxLocalResource://54366679475792" />
+      <img class="userinfowrap-userface" :src="userinfo.img" />
       <img class="userinfowrap-q1 quan" src="./images/quan1.png" />
       <img class="userinfowrap-q2 quan" src="./images/quan2.png" />
       <img class="userinfowrap-q3 quan" src="./images/quan3.png" />
       <img class="userinfowrap-q4 quan" src="./images/quan4.png" />
       <img class="userinfowrap-remind" src="./images/top_remind.png" />
       <div class="userinfowrap-note">
-          <p>我是：<span>陈小爱</span>, 我在这里等您</p>
-          <p>工号：<span>138907890</span> 手机号：<span>18927268989</span></p>
+          <p>我是：<span>{{userinfo.name}}</span>, 我在这里等您</p>
+          <p>工号：<span>{{userinfo.no}}</span> 手机号：<span>{{userinfo.mobile}}</span></p>
       </div>
       <div class="userinfowrap-table">
           <img class="userinfowrap-table-title" src="./images/table-title.png" />
           <table class="userinfowrap-table-main">
               <tr>
-                  <td>88%</td>
-                  <td>88%</td>
-                  <td>88%</td>
-                  <td>88%</td>
-                  <td>88%</td>
-                  <td>88%</td>
-                  <td>88%</td>
+                  <td>{{userinfo.data.xuexinengli}}</td>
+                  <td>{{userinfo.data.zixinxin}}</td>
+                  <td>{{userinfo.data.zhixingli}}</td>
+                  <td>{{userinfo.data.chuangxin}}</td>
+                  <td>{{userinfo.data.yizhili}}</td>
+                  <td>{{userinfo.data.goutongnengli}}</td>
+                  <td>{{userinfo.data.jineng}}</td>
               </tr>
               <tr>
                   <td>学习能力</td>
@@ -32,13 +32,13 @@
                   <td>技能</td>
               </tr>
           </table>
-          <div class="userinfowrap-table-value">1号主管值 92%</div>
+          <div class="userinfowrap-table-value">1号主管值 {{userinfo.data.zhuguanzhi}}</div>
           <div class="userinfowrap-table-subvalue">
-              <p>陈小爱，你的自信心爆表，2018创业</p>
+              <p>{{userinfo.name}}，你的自信心爆表，2018创业</p>
               <p>会找的就是你，加入我们吧！</p>
           </div>
           <div class="userinfowrap-table-btwrap">
-              <div class="bt-like">300</div>
+              <div @click.stop="addZan" class="bt-like">{{userinfo.zan}}</div>
               <router-link class="bt-left" to="/rank">明星排行榜</router-link>
               <router-link class="bt-right" to="/upload">我也要玩</router-link>
           </div>
@@ -62,6 +62,7 @@ export default {
     },
     computed: {
         ...mapGetters({
+            userinfo: 'userinfo',
         }),
     },
     components: {
@@ -69,6 +70,9 @@ export default {
     methods: {
         uploadimg() {
             wxChooseImage(); // eslint-disable-line
+        },
+        addZan() {
+            this.$store.dispatch('setLikeNum', this.userinfo.no);
         },
     },
     watch: {

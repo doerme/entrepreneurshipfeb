@@ -7,6 +7,8 @@ const apiurl = 'http://test.weixinlm.com/';
 const state = {
     usersex: 1,
     dataurl: null,
+    imgurl: null,
+    toastmsg: null,
     userinfo: {
         id: null,
         openid: null,
@@ -31,6 +33,8 @@ const state = {
 
 // getters
 const getters = {
+    imgurl: stateData => stateData.imgurl,
+    toastmsg: stateData => stateData.toastmsg,
     usersex: stateData => stateData.usersex,
     dataurl: stateData => stateData.dataurl,
     userinfo: stateData => stateData.userinfo,
@@ -39,6 +43,23 @@ const getters = {
 
 // actions
 const actions = {
+    setLikeNum({ commit }, acdata){
+        $.ajax({
+            url: `${apiurl}addons/api/Millionbusinessforum/like`,
+            dataType: 'JSONP',
+            data: {
+                no: acdata
+            }
+        }).then((jdata)=>{
+            if (jdata.err === 1) {
+                console.log(jdata.errmsg);
+                commit(types.setToastMsg, jdata.errmsg);
+            } else {
+                console.log('addlike');
+                commit(types.setUserInfo, 'addlike');
+            }
+        })
+    },
     setUserSex({ commit }, acdata) {
         commit(types.setUserSex, acdata);
     },
@@ -48,7 +69,13 @@ const actions = {
             dataType: 'JSONP',
             data: acdata,
         }).then((jdata)=>{
-            commit(types.setDataUrl, acdata.localId);
+            if (jdata.err === 1) {
+                console.log(jdata.errmsg);
+                commit(types.setToastMsg, jdata.errmsg);
+            } else {
+                commit(types.setDataUrl, acdata.localId);
+                commit(types.setUserInfo, jdata.data);
+            }
         });
         
     },
@@ -79,6 +106,10 @@ const actions = {
 
 // mutations
 const mutations = {
+    [types.setToastMsg](stateData, acdata) {
+        const stateNew = stateData;
+        stateNew.toastmsg = acdata;
+    },
     [types.setUserSex](stateData, acdata) {
         const stateNew = stateData;
         stateNew.usersex = acdata;
@@ -87,9 +118,19 @@ const mutations = {
         const stateNew = stateData;
         stateNew.dataurl = acdata;
     },
+    [types.setImgUrl](stateData, acdata) {
+        const stateNew = stateData;
+        stateNew.imgurl = acdata;
+    },
     [types.setUserInfo](stateData, acdata) {
         const stateNew = stateData;
-        stateNew.userinfo = acdata;
+        console.log('types.setUserInfo', acdata, stateNew.userinfo.zan);
+        if(acdata === 'addlike') {
+            console.log('1');
+            stateNew.userinfo.zan = (stateNew.userinfo.zan + 1);
+        } else {
+            stateNew.userinfo = acdata;
+        }
     },
     [types.setRankList](stateData, acdata) {
         const stateNew = stateData;

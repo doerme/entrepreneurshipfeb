@@ -38,7 +38,7 @@
             <input type="tel" maxlength="10" placeholder="输入您的工号" ref="inputno" />
             <input type="tel" maxlength="13" placeholder="输入您的手机" ref="inputmobile" />
             <textarea ref="inputsentence" placeholder="输入您的宣言" cols="30" rows="3"></textarea>
-            <div class="uploadwrap-form-bt" @click.stop="uploadwx">
+            <div class="uploadwrap-form-bt" @click.stop="uploadwxtest">
                 <input v-if="false" @change="uploadfile" ref="selectfileele" class="selectfile" type="file" accept="image/*" size="100">
                 上传照片
             </div>
@@ -49,8 +49,7 @@
 <script>
 /* eslint-disable */
 import { mapGetters } from 'vuex';
-
-// import util from '../../public/lib/util.js';
+import util from '../../public/lib/util.js';
 
 export default {
     created() {
@@ -65,6 +64,7 @@ export default {
         ...mapGetters({
             usersex: 'usersex',
             dataurl: 'dataurl',
+            toastmsg: 'toastmsg',
         }),
     },
     components: {
@@ -90,12 +90,53 @@ export default {
             // this.$refs.selectfileele
             this.$router.push({ path: '/loading' });
         },
+        uploadwxtest() {
+            const self = this;
+            const inputname = self.$refs.inputname.value;
+            const no = self.$refs.inputno.value;
+            const mobile = self.$refs.inputmobile.value;
+            const sentence = self.$refs.inputsentence.value;
+            if(inputname.length < 1) {
+                this.$toast.center('请输入您的姓名');
+                return;
+            }else if(no.length < 1) {
+                this.$toast.center('请输入您的工号');
+                return;
+            }else if(mobile.length < 1 || !(/^1[0-9]{10}$/.test(mobile))){
+                this.$toast.center('请正确输入您的手机');
+                return;
+            }else if(sentence.length < 1) {
+                this.$toast.center('请输入您的宣言');
+                return;
+            }
+            self.$store.dispatch('setDataUrl', {
+                name:inputname,
+                no:no,
+                mobile:mobile,
+                sentence:sentence,
+                media_id: 'km3PbYGRq00SmQxZ0kSUPfJUC79hodkIKfx-GkcClTPBXyzms6RfvNUBDVSNByrK',
+                local_id: 'wxLocalResource://54366679475792' 
+            });
+        },
         uploadwx() {
             const self = this;
             const inputname = self.$refs.inputname.value;
             const no = self.$refs.inputno.value;
             const mobile = self.$refs.inputmobile.value;
             const sentence = self.$refs.inputsentence.value;
+            if(inputname.length < 1) {
+                this.$toast.center('请输入您的姓名');
+                return;
+            }else if(no.length < 1) {
+                this.$toast.center('请输入您的工号');
+                return;
+            }else if(mobile.length < 1 || !(/^1[0-9]{10}$/.test(mobile))){
+                this.$toast.center('请正确输入您的手机');
+                return;
+            }else if(sentence.length < 1) {
+                this.$toast.center('请输入您的宣言');
+                return;
+            }
             wxChooseImage(); // eslint-disable-line
             
             window.afterwxChooseImage = () => {
@@ -107,15 +148,19 @@ export default {
                     no:no,
                     mobile:mobile,
                     sentence:sentence,
-                    mediaId: mediaId,
-                    localId: localId 
+                    media_id: mediaId,
+                    local_id: localId 
                 });
-                self.$router.push({ path: '/result' });
             }
         },
     },
     watch: {
-
+        dataurl() {
+            this.$router.push({ path: '/result' });
+        },
+        toastmsg(val) {
+            this.$toast.center(val);
+        },
     },
     mounted() {
 

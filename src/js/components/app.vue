@@ -1,10 +1,15 @@
 <script>
+    import 'vue2-toast/lib/toast.css';
+    import Toast from 'vue2-toast';
+
     import VueRouter from '../public/lib/vue-router.js';
     import IndexView from './index/index.vue';
     import RankView from './rank/index.vue';
     import UploadView from './upload/index.vue';
     import Loading from './loading/index.vue';
     import ResultView from './result/index.vue';
+    
+    Vue.use(Toast);
 
     const routes = [
         { path: '/', component: IndexView },
@@ -57,6 +62,13 @@
             left: 50%;
             transform: translateX(-50%);
         }
+    }
+
+    [data-dpr="3"] div.lx-toast{
+        transform: scale(3) translate(-20%,-50%);
+    }
+    [data-dpr="2"] div.lx-toast{
+        transform: scale(2) translate(-25%,-50%);
     }
     [data-dpr="3"] div.legoToast{
         transform: scale(3) translate(-20%,-50%);

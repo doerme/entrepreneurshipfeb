@@ -14,7 +14,7 @@
 import { mapGetters } from 'vuex';
 import UserInfo from './userinfo.vue';
 import IndexInfo from './indexinfo.vue';
-// import util from '../../public/lib/util.js';
+import util from '../../public/lib/util.js';
 
 export default {
     created() {
@@ -39,7 +39,11 @@ export default {
 
     },
     mounted() {
-        this.$store.dispatch('setUserInfo');
+        if (util.getURLParam('no')) {
+            this.$store.dispatch('setUserInfo');
+        } else {
+            this.$router.push({ path: '/upload' });
+        }
     },
 };
 </script>
