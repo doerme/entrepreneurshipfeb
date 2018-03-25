@@ -39,7 +39,7 @@ export default {
 
     },
     mounted() {
-
+        this.$store.dispatch('setUserInfo');
     },
 };
 </script>

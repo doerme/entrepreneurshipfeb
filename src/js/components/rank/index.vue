@@ -5,50 +5,11 @@
         </div>
         <div class="user-likenum"><span>陈小爱</span><span>982赞</span></div>
         <ul class="rank-list">
-            <li>
-                <img class="rank-avatar" src="./images/avatar_eg.png" />
-                <span class="rank-name">露台</span>
-                <span class="rank-num">888赞</span>
-            </li>
-            <li>
-                <img class="rank-avatar" src="./images/avatar_eg.png" />
-                <span class="rank-name">露台</span>
-                <span class="rank-num">888赞</span>
-            </li>
-            <li>
-                <img class="rank-avatar" src="./images/avatar_eg.png" />
-                <span class="rank-name">露台</span>
-                <span class="rank-num">888赞</span>
-            </li>
-            <li>
-                <img class="rank-avatar" src="./images/avatar_eg.png" />
-                <span class="rank-name">露台</span>
-                <span class="rank-num">888赞</span>
-            </li>
-            <li>
-                <img class="rank-avatar" src="./images/avatar_eg.png" />
-                <span class="rank-name">露台</span>
-                <span class="rank-num">888赞</span>
-            </li>
-            <li>
-                <img class="rank-avatar" src="./images/avatar_eg.png" />
-                <span class="rank-name">露台</span>
-                <span class="rank-num">888赞</span>
-            </li>
-            <li>
-                <img class="rank-avatar" src="./images/avatar_eg.png" />
-                <span class="rank-name">露台</span>
-                <span class="rank-num">888赞</span>
-            </li>
-            <li>
-                <img class="rank-avatar" src="./images/avatar_eg.png" />
-                <span class="rank-name">露台</span>
-                <span class="rank-num">888赞</span>
-            </li>
-            <li>
-                <img class="rank-avatar" src="./images/avatar_eg.png" />
-                <span class="rank-name">露台</span>
-                <span class="rank-num">888赞</span>
+            <li v-for="(item, index) in rankList" 
+                v-bind:key="index">
+                <img class="rank-avatar" :src="item.img" />
+                <span class="rank-name">{{item.name}}</span>
+                <span class="rank-num">{{item.zan}}赞</span>
             </li>
         </ul>
     </div>
@@ -70,6 +31,8 @@ export default {
     },
     computed: {
         ...mapGetters({
+            rankList: 'rankList',
+            userinfo: 'userinfo',
         }),
     },
     components: {
@@ -81,7 +44,7 @@ export default {
 
     },
     mounted() {
-
+        this.$store.dispatch('setRankList');
     },
 };
 </script>

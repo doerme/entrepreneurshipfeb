@@ -34,12 +34,12 @@
             <img v-show="usersex===2" @click.stop="changeSex" :key="2" class="uploadwrap-sex-lady" src="./images/sex-lady.png" />
         </transition-group>
         <div v-show="formshow" class="uploadwrap-form">
-            <input type="text" maxlength="15" placeholder="输入您的姓名" />
-            <input type="tel" maxlength="10" placeholder="输入您的工号" />
-            <input type="tel" maxlength="13" placeholder="输入您的手机" />
-            <textarea placeholder="输入您的宣言" cols="30" rows="3"></textarea>
-            <div class="uploadwrap-form-bt">
-                <input @change="uploadfile" ref="selectfileele" class="selectfile" type="file" accept="image/*" size="100">
+            <input type="text" maxlength="15" placeholder="输入您的姓名" ref="inputname" />
+            <input type="tel" maxlength="10" placeholder="输入您的工号" ref="inputno" />
+            <input type="tel" maxlength="13" placeholder="输入您的手机" ref="inputmobile" />
+            <textarea ref="inputsentence" placeholder="输入您的宣言" cols="30" rows="3"></textarea>
+            <div class="uploadwrap-form-bt" @click.stop="uploadwx">
+                <input v-if="false" @change="uploadfile" ref="selectfileele" class="selectfile" type="file" accept="image/*" size="100">
                 上传照片
             </div>
         </div>
@@ -47,6 +47,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import { mapGetters } from 'vuex';
 
 // import util from '../../public/lib/util.js';
@@ -88,6 +89,29 @@ export default {
             reader.readAsDataURL(file); // 读出 base64
             // this.$refs.selectfileele
             this.$router.push({ path: '/loading' });
+        },
+        uploadwx() {
+            const self = this;
+            const inputname = self.$refs.inputname.value;
+            const no = self.$refs.inputno.value;
+            const mobile = self.$refs.inputmobile.value;
+            const sentence = self.$refs.inputsentence.value;
+            wxChooseImage(); // eslint-disable-line
+            
+            window.afterwxChooseImage = () => {
+                self.$router.push({ path: '/loading' });
+            }
+            window.afterwxUploadImage = (localId, mediaId) => {
+                self.$store.dispatch('setDataUrl', {
+                    name:inputname,
+                    no:no,
+                    mobile:mobile,
+                    sentence:sentence,
+                    mediaId: mediaId,
+                    localId: localId 
+                });
+                self.$router.push({ path: '/result' });
+            }
         },
     },
     watch: {
@@ -150,7 +174,8 @@ $font_size : 108;
     &-form{
         position: absolute;
         background: #232b3a;
-        height: 100%;
+        height: 90%;
+        padding-top: 15%;
         &-bt{
             position: absolute;
             left: 50%;
@@ -185,6 +210,7 @@ $font_size : 108;
             text-align: center;
             font-size: rem(50);
             margin-top: rem(30);
+            padding: 0;
         }
         textarea{
             position: relative;

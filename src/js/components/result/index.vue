@@ -1,6 +1,6 @@
 <template>
     <div class="resultwrap">
-        <div class="snapshowview" id="snapshowview">
+        <div v-show="true" class="snapshowview" id="snapshowview">
             <div class="snapshowview-title">1号主管数据分析</div>
             <div class="snapshowview-percent">92<span>%</span></div>
             <div class="snapshowview-subtitle">1号主管值</div>
@@ -16,7 +16,7 @@
             <div class="snapshowview-remind">扫描二维码了解详细，帮我点赞</div>
             <img class="uploadimage" :src="dataurl" />
         </div>
-        <img class="resultimg" :src="resultImgSrc" />
+        <img v-show="false" class="resultimg" :src="resultImgSrc" />
         <div class="takesnap-bt">长按保存我的数据</div>
     </div>
 </template>
@@ -33,6 +33,7 @@ export default {
     data() {
         return {
             resultImgSrc: null,
+            snapshowviewShow: true,
         };
     },
     computed: {
@@ -45,10 +46,11 @@ export default {
     methods: {
         takeScreenshot() {
             const self = this;
-            console.log('test');
+            console.log('takeScreenshot');
             html2canvas(document.getElementById('snapshowview')).then(canvas => { // eslint-disable-line
                 document.body.appendChild(canvas);
                 self.resultImgSrc = canvas.toDataURL();
+                self.snapshowviewShow = false;
             });
         },
     },
@@ -75,11 +77,14 @@ $font_size : 108;
     width: 100%;
     background: #232b3a url('./images/bg.jpg') no-repeat;
     background-size: 100% auto;
+    overflow: hidden;
     .resultimg{
         position: absolute;
         left: 0;
         width: 100%;
+        height: 100%;
         z-index: 8;
+        object-fit: contain;
     }
     .uploadimage{
         position: absolute;
@@ -142,7 +147,7 @@ $font_size : 108;
             top: rem(1690);
         }
         &-v1{
-            top: rem(440);
+            top: rem(430);
             left: rem(72);
         }
         &-v2{

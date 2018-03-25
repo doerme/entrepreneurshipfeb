@@ -23,6 +23,8 @@
         router,
         name: 'app',
     };
+
+    initWxConf(); // eslint-disable-line
 </script>
 
 <template>

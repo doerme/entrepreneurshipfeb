@@ -1,6 +1,6 @@
 <template>
   <div class="userinfowrap">
-      <div class="userinfowrap-userface"></div>
+      <img class="userinfowrap-userface" src="wxLocalResource://54366679475792" />
       <img class="userinfowrap-q1 quan" src="./images/quan1.png" />
       <img class="userinfowrap-q2 quan" src="./images/quan2.png" />
       <img class="userinfowrap-q3 quan" src="./images/quan3.png" />
@@ -67,7 +67,9 @@ export default {
     components: {
     },
     methods: {
-
+        uploadimg() {
+            wxChooseImage(); // eslint-disable-line
+        },
     },
     watch: {
 
@@ -99,6 +101,12 @@ $font_size : 108;
 .userinfowrap{
     position: relative;
     height: rem(2200);
+    &-upload{
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 0;
+    }
     &-table{
         position: absolute;
         top: rem(1120);

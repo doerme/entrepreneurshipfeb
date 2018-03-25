@@ -19,7 +19,7 @@ export default {
     },
     data() {
         return {
-
+            loadingdot: '.',
         };
     },
     computed: {
@@ -41,9 +41,6 @@ export default {
 
     },
     mounted() {
-        setTimeout(() => {
-            this.$router.push({ path: '/result' });
-        }, 2000);
     },
 };
 </script>
