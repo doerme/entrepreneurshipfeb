@@ -61,12 +61,13 @@ export default {
     watch: {
     },
     mounted() {
-        console.log('mounted result');
-        const coverImg = new Image();
-        coverImg.src = this.userinfo.img;
-        coverImg.onload = () => {
-            this.takeScreenshot();
-        };
+        this.takeScreenshot();
+        // console.log('mounted result');
+        // const coverImg = new Image();
+        // coverImg.src = this.userinfo.img;
+        // coverImg.onload = () => {
+        //     this.takeScreenshot();
+        // };
     },
 };
 </script>

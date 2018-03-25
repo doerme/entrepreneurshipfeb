@@ -34,11 +34,11 @@
             <img v-show="usersex===2" @click.stop="changeSex" :key="2" class="uploadwrap-sex-lady" src="./images/sex-lady.png" />
         </transition-group>
         <div v-show="formshow" class="uploadwrap-form">
-            <input type="text" maxlength="15" placeholder="输入您的姓名" ref="inputname" />
-            <input type="tel" maxlength="10" placeholder="输入您的工号" ref="inputno" />
-            <input type="tel" maxlength="13" placeholder="输入您的手机" ref="inputmobile" />
-            <textarea ref="inputsentence" placeholder="输入您的宣言" cols="30" rows="3"></textarea>
-            <div class="uploadwrap-form-bt" @click.stop="uploadwxtest">
+            <input type="text" maxlength="15" placeholder="输入您的姓名" ref="inputname" :value="myinfo.name" />
+            <input type="tel" maxlength="10" placeholder="输入您的工号" ref="inputno" :value="myinfo.no"/>
+            <input type="tel" maxlength="13" placeholder="输入您的手机" ref="inputmobile" :value="myinfo.mobile"/>
+            <textarea ref="inputsentence" placeholder="输入您的宣言" cols="30" rows="3" :value="myinfo.sentence"></textarea>
+            <div class="uploadwrap-form-bt" @click.stop="uploadwx">
                 <input v-if="false" @change="uploadfile" ref="selectfileele" class="selectfile" type="file" accept="image/*" size="100">
                 上传照片
             </div>
@@ -65,6 +65,7 @@ export default {
             usersex: 'usersex',
             dataurl: 'dataurl',
             toastmsg: 'toastmsg',
+            myinfo: 'myinfo',
         }),
     },
     components: {
@@ -143,19 +144,22 @@ export default {
                 self.$router.push({ path: '/loading' });
             }
             window.afterwxUploadImage = (localId, mediaId) => {
+                console.log('afterwxUploadImage',localId, mediaId);
                 self.$store.dispatch('setDataUrl', {
                     name:inputname,
                     no:no,
                     mobile:mobile,
                     sentence:sentence,
                     media_id: mediaId,
-                    local_id: localId 
+                    local_id: localId
                 });
+                // this.$router.push({ path: '/result' });
             }
         },
     },
     watch: {
-        dataurl() {
+        userinfo(val) {
+            console.log('upload userinfo change', val);
             this.$router.push({ path: '/result' });
         },
         toastmsg(val) {
@@ -163,7 +167,7 @@ export default {
         },
     },
     mounted() {
-
+        this.$store.dispatch('setMyInfo');
     },
 };
 </script>

@@ -9,6 +9,12 @@ const state = {
     dataurl: null,
     imgurl: null,
     toastmsg: null,
+    myinfo: {
+        name: null,
+        no: null,
+        mobile: null,
+        sentence: null,
+    },
     userinfo: {
         id: null,
         openid: null,
@@ -39,10 +45,20 @@ const getters = {
     dataurl: stateData => stateData.dataurl,
     userinfo: stateData => stateData.userinfo,
     rankList: stateData => stateData.rankList,
+    myinfo: stateData => stateData.myinfo,
 };
 
 // actions
 const actions = {
+    setMyInfo({ commit }){
+        $.ajax({
+            url: `${apiurl}addons/api/Millionbusinessforum/get_local_info`,
+            dataType: 'JSONP',
+        }).then((jdata)=>{
+            console.log('get_local_info', jdata);
+            commit(types.setMyInfo, jdata.data)
+        });
+    },
     setLikeNum({ commit }, acdata){
         $.ajax({
             url: `${apiurl}addons/api/Millionbusinessforum/like`,
@@ -121,6 +137,10 @@ const mutations = {
     [types.setImgUrl](stateData, acdata) {
         const stateNew = stateData;
         stateNew.imgurl = acdata;
+    },
+    [types.setMyInfo](stateData, acdata) {
+        const stateNew = stateData;
+        stateNew.myinfo = acdata;
     },
     [types.setUserInfo](stateData, acdata) {
         const stateNew = stateData;

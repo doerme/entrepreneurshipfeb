@@ -1,9 +1,9 @@
 <template>
     <div class="rankwrap">
-        <div class="user-avatar">
+        <div class="user-avatar" v-if="rankList.length > 0">
             <img class="user-avatar-main" :src="rankList[0].img" />
         </div>
-        <div class="user-likenum"><span>{{rankList[0].name}}</span> <span>{{rankList[0].zan}}赞</span></div>
+        <div v-if="rankList.length > 0" class="user-likenum"><span>{{rankList[0].name}}</span> <span>{{rankList[0].zan}}赞</span></div>
         <ul class="rank-list">
             <li v-for="(item, index) in rankList" 
                 v-bind:key="index" v-show="index > 1">

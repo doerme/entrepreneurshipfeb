@@ -1,6 +1,6 @@
 <template>
   <div class="loadingwrap">
-      <div class="loadingwrap-nick">陈大爱</div>
+      <div class="loadingwrap-nick">{{userinfo.name}}</div>
       <div class="loadingwrap-remind">1号主管值正在加速检测中.....</div>
       <img v-show="usersex === 1" class="loadingwrap-main-male" src="./images/male.png" />
       <img v-show="usersex === 2" class="loadingwrap-main-female" src="./images/female.png" />
@@ -25,6 +25,7 @@ export default {
     computed: {
         ...mapGetters({
             usersex: 'usersex',
+            userinfo: 'userinfo',
         }),
     },
     components: {
@@ -38,7 +39,10 @@ export default {
         },
     },
     watch: {
-
+        userinfo(val) {
+            console.log('loading userinfo change', val);
+            this.$router.push({ path: '/result' });
+        },
     },
     mounted() {
     },

@@ -1,6 +1,7 @@
 module.exports = {
   js: {
     assets: true,
+    console: true,
   },
   css: {
     px2rem: true,
