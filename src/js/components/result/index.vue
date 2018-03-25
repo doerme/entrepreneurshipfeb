@@ -23,7 +23,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-
+import domtoimage from 'dom-to-image';
 // import util from '../../public/lib/util.js';
 
 export default {
@@ -46,10 +46,14 @@ export default {
         takeScreenshot() {
             const self = this;
             console.log('test');
-            html2canvas(document.getElementById('snapshowview')).then(canvas => { // eslint-disable-line
-                document.body.appendChild(canvas);
-                self.resultImgSrc = canvas.toDataURL();
+            domtoimage.toJpeg(document.getElementById('snapshowview'), { quality: 0.95 })
+            .then((dataUrl) => {
+                self.resultImgSrc = dataUrl;
             });
+            // html2canvas(document.getElementById('snapshowview')).then(canvas => {
+            //     document.body.appendChild(canvas);
+            //     self.resultImgSrc = canvas.toDataURL();
+            // });
         },
     },
     watch: {

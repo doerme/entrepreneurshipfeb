@@ -150,7 +150,8 @@ $font_size : 108;
     &-form{
         position: absolute;
         background: #232b3a;
-        height: 100%;
+        height: 90%;
+        padding-top: 15%;
         &-bt{
             position: absolute;
             left: 50%;
@@ -185,6 +186,7 @@ $font_size : 108;
             text-align: center;
             font-size: rem(50);
             margin-top: rem(30);
+            padding: 0;
         }
         textarea{
             position: relative;
