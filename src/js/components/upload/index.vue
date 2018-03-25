@@ -30,15 +30,18 @@
         <div class="uploadwrap-subtitle">1号主管分析 比你更懂你</div>
         <div @click.stop="formshow=true" class="uploadwrap-bt">1号主管分析</div>
         <transition-group name="fade" mode="out-in">
-            <img v-show="sex===1" @click.stop="changeSex" :key="1"  class="uploadwrap-sex-man" src="./images/sex-man.png" />
-            <img v-show="sex===2" @click.stop="changeSex" :key="2" class="uploadwrap-sex-lady" src="./images/sex-lady.png" />
+            <img v-show="usersex===1" @click.stop="changeSex" :key="1"  class="uploadwrap-sex-man" src="./images/sex-man.png" />
+            <img v-show="usersex===2" @click.stop="changeSex" :key="2" class="uploadwrap-sex-lady" src="./images/sex-lady.png" />
         </transition-group>
         <div v-show="formshow" class="uploadwrap-form">
             <input type="text" maxlength="15" placeholder="输入您的姓名" />
             <input type="tel" maxlength="10" placeholder="输入您的工号" />
             <input type="tel" maxlength="13" placeholder="输入您的手机" />
             <textarea placeholder="输入您的宣言" cols="30" rows="3"></textarea>
-            <div @click.stop="uploadfile" class="uploadwrap-form-bt">上传照片</div>
+            <div class="uploadwrap-form-bt">
+                <input @change="uploadfile" ref="selectfileele" class="selectfile" type="file" accept="image/*" size="100">
+                上传照片
+            </div>
         </div>
     </div>
 </template>
@@ -54,25 +57,36 @@ export default {
     },
     data() {
         return {
-            sex: 1,
             formshow: false,
         };
     },
     computed: {
         ...mapGetters({
+            usersex: 'usersex',
+            dataurl: 'dataurl',
         }),
     },
     components: {
     },
     methods: {
         changeSex() {
-            if (this.sex === 1) {
-                this.sex = 2;
+            if (this.usersex === 1) {
+                this.$store.dispatch('setUserSex', 2);
             } else {
-                this.sex = 1;
+                this.$store.dispatch('setUserSex', 1);
             }
         },
-        uploadfile() {
+        uploadfile(e) {
+            const self = this;
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onloadend = function () {
+                const dataURL = reader.result;
+                console.log('dataURL', dataURL);
+                self.$store.dispatch('setDataUrl', dataURL);
+            };
+            reader.readAsDataURL(file); // 读出 base64
+            // this.$refs.selectfileele
             this.$router.push({ path: '/loading' });
         },
     },
@@ -151,6 +165,14 @@ $font_size : 108;
             font-size: rem(68);
             color: #FFF;
             font-weight: bold;
+            .selectfile{
+                position: absolute;
+                top: 0;
+                left: 0px;
+                height: 100%;
+                width: 100%;
+                opacity: 0;
+            }
             &:active{
                 opacity: 0.8;
             }
@@ -285,25 +307,25 @@ $font_size : 108;
                 animation: widthanimate 2s linear alternate infinite;
             }
             &:nth-child(2){
-                animation: widthanimate 3s linear infinite;
+                animation: widthanimate 3s linear alternate infinite;
             }
             &:nth-child(3){
                 animation: widthanimate 4s linear alternate infinite;
             }
             &:nth-child(4){
-                animation: widthanimate 5s linear infinite;
+                animation: widthanimate 5s linear alternate infinite;
             }
             &:nth-child(5){
                 animation: widthanimate 6s linear alternate infinite;
             }
             &:nth-child(6){
-                animation: widthanimate 7s linear infinite;
+                animation: widthanimate 7s linear alternate infinite;
             }
             &:nth-child(7){
                 animation: widthanimate 8s linear alternate infinite;
             }
             &:nth-child(8){
-                animation: widthanimate 8s linear infinite;
+                animation: widthanimate 8s linear alternate infinite;
             }
         }
     }

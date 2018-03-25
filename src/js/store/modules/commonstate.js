@@ -2,26 +2,35 @@ import * as types from '../mutation-types';
 
 // initial state
 const state = {
-    littleRecordShow: 'notready',
+    usersex: 1,
+    dataurl: null,
 };
 
 // getters
 const getters = {
-    littleRecordShow: stateData => stateData.littleRecordShow,
+    usersex: stateData => stateData.usersex,
+    dataurl: stateData => stateData.dataurl,
 };
 
 // actions
 const actions = {
-    setLittleRecordShow({ commit }, { isShow }) {
-        commit(types.setLittleRecordShow, isShow);
+    setUserSex({ commit }, acdata) {
+        commit(types.setUserSex, acdata);
+    },
+    setDataUrl({ commit }, acdata) {
+        commit(types.setDataUrl, acdata);
     },
 };
 
 // mutations
 const mutations = {
-    [types.setLittleRecordShow](stateData, isShow) {
+    [types.setUserSex](stateData, acdata) {
         const stateNew = stateData;
-        stateNew.littleRecordShow = isShow;
+        stateNew.usersex = acdata;
+    },
+    [types.setDataUrl](stateData, acdata) {
+        const stateNew = stateData;
+        stateNew.dataurl = acdata;
     },
 };
 
