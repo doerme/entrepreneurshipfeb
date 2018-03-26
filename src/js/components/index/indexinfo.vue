@@ -1,10 +1,11 @@
 <template>
     <div class="indexinfowrap">
-        <video class="indexinfowrap-v1 videounit" >
-            <source src="http://v.youku.com/v_show/id_XMzEzMzI2ODUyMA==.html?spm=a2h3j.8428770.3416059.1" type="video/mp4" />
-        </video>
-        <video class="indexinfowrap-v2 videounit" src="http://v.youku.com/v_show/id_XMzEzMzI2ODUyMA==.html?spm=a2h3j.8428770.3416059.1"></video>
-        <video class="indexinfowrap-v3 videounit" src="http://v.youku.com/v_show/id_XMzE4ODcyMDcyOA==.html?spm=a2h3j.8428770.3416059.1"></video>
+        <video v-if="configdata && configdata.videos" class="indexinfowrap-v1 videounit" :src="configdata.videos[0]" ></video>
+        <video v-if="configdata && configdata.videos" class="indexinfowrap-v2 videounit" :src="configdata.videos[1]"></video>
+        <video v-if="configdata && configdata.videos" class="indexinfowrap-v3 videounit" :src="configdata.videos[2]"></video>
+        <div class="indexinfowrap-picline" v-if="configdata && configdata.pics">
+            <img class="indexinfowrap-picline-unit" v-for="(item, index) in configdata.pics" v-bind:key="index" :src="item" />
+        </div>
     </div>
 </template>
 
@@ -24,6 +25,7 @@ export default {
     },
     computed: {
         ...mapGetters({
+            configdata: 'configdata',
         }),
     },
     components: {
@@ -54,6 +56,20 @@ $font_size : 108;
     width: 100%;
     background: url('./images/content_wrap_bg.jpg') no-repeat;
     background-size: 100% auto; 
+    &-picline{
+        position: absolute;
+        top: rem(1670);
+        left: rem(80);
+        width: rem(930);
+        height: rem(200);
+        white-space: nowrap;
+        overflow-y: auto;
+        &-unit{
+            height: 100%;
+            display: inline-block;
+            margin-right: rem(30);
+        }
+    }
     &-v1{
         right: rem(88);
         top: rem(180);

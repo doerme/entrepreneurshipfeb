@@ -35,6 +35,7 @@ const state = {
         },
     },
     rankList: [],
+    configdata: null,
 };
 
 // getters
@@ -46,10 +47,20 @@ const getters = {
     userinfo: stateData => stateData.userinfo,
     rankList: stateData => stateData.rankList,
     myinfo: stateData => stateData.myinfo,
+    configdata: stateData => stateData.configdata,
 };
 
 // actions
 const actions = {
+    setConfig({ commit }){
+        $.ajax({
+            url: `${apiurl}addons/api/Millionbusinessforum/share_config`,
+            dataType: 'JSONP',
+        }).then((jdata)=>{
+            console.log('share_config', jdata);
+            commit(types.setConfig, jdata)
+        });
+    },
     setMyInfo({ commit }){
         $.ajax({
             url: `${apiurl}addons/api/Millionbusinessforum/get_local_info`,
@@ -122,6 +133,10 @@ const actions = {
 
 // mutations
 const mutations = {
+    [types.setConfig](stateData, acdata) {
+        const stateNew = stateData;
+        stateNew.configdata = acdata;
+    },
     [types.setToastMsg](stateData, acdata) {
         const stateNew = stateData;
         stateNew.toastmsg = acdata;

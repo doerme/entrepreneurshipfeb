@@ -27,6 +27,7 @@ export default {
     },
     computed: {
         ...mapGetters({
+            configdata: 'configdata',
         }),
     },
     components: {
@@ -43,6 +44,9 @@ export default {
             this.$store.dispatch('setUserInfo');
         } else {
             this.$router.push({ path: '/upload' });
+        }
+        if (!this.configdata) {
+            this.$store.dispatch('setConfig');
         }
     },
 };
