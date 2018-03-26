@@ -69,8 +69,9 @@ $font_size : 108;
         width: rem(930);
         height: rem(200);
         white-space: nowrap;
-        overflow-y: auto;
+        overflow-y: hidden;
         -webkit-overflow-scrolling : touch;
+
         &-unit{
             height: 100%;
             display: inline-block;
