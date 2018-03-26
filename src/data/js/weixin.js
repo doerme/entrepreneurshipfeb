@@ -1,4 +1,5 @@
-var SiteUrl = 'http://test.weixinlm.com/';
+/* eslint-disable */
+var SiteUrl = /test/.test(window.location.href) ? '//test.weixinlm.com/' : '//pingan.weixinlm.com/';
 var ApiUrl = SiteUrl+'addons/api/';
 var _localurl = window.location.href.split('#')[0];
 var localUrl = encodeURIComponent(_localurl);

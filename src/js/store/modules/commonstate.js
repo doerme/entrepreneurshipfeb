@@ -2,7 +2,7 @@
 import * as types from '../mutation-types';
 import util from '../../public/lib/util.js';
 
-const apiurl = 'http://test.weixinlm.com/';
+const apiurl = /test/.test(window.location.href) ? '//test.weixinlm.com/' : '//pingan.weixinlm.com/';
 // initial state
 const state = {
     usersex: 1,
