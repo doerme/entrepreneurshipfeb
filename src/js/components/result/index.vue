@@ -12,7 +12,7 @@
             <div class="snapshowview-v6 pv">意志力 {{userinfo.data.yizhili}}</div>
             <div class="snapshowview-v7 pv">创新 {{userinfo.data.chuangxin}}</div>
             <div class="snapshowview-note">{{userinfo.sentence}}</div>
-            <img class="snapshowview-qrcode" src="./images/qrcode.png" />
+            <div class="snapshowview-qrcode js-qrdraw"></div>
             <div class="snapshowview-remind">扫描二维码了解详细，帮我点赞</div>
             <img class="uploadimage" :src="userinfo.img" />
         </div>
@@ -22,8 +22,9 @@
 </template>
 
 <script>
+/* eslint-disable */
 import { mapGetters } from 'vuex';
-
+import qrcode from '../../public/lib/arale-qrcode.js';
 // import util from '../../public/lib/util.js';
 
 export default {
@@ -54,14 +55,57 @@ export default {
             }).then((canvas) => {
                 document.body.appendChild(canvas);
                 self.resultImgSrc = canvas.toDataURL();
-                self.snapshowviewShow = false;
+                self.snapshowviewShow = true;
             });
         },
+        endCut(no) {
+            console.log('endCut', no);
+            let uri = null;
+            let dpi = 130;
+            if($('html').data('dpr') == 1){
+                dpi = dpi / 2;
+            }
+            if($('html').data('dpr') == 3){
+                dpi = dpi / 2 * 3;
+            }
+
+            if(!/test/.test(window.location.href)){
+                uri = 'http://pingan.weixinlm.com/h5/wch/?no='+ no;
+            } else {
+                uri = 'http://test.weixinlm.com/h5/wch/?no=' + no;
+            }
+            const qrnode = new qrcode({
+                render: 'svg',
+                size: dpi,
+                text: uri
+            });
+            $('.js-qrdraw').html(qrnode);
+            let imgt =new Image();  
+            imgt.onload = () => {
+                console.log('imgt.onload');
+                imgt.onload =null;  
+                this.takeScreenshot();
+            }
+            imgt.src = this.userinfo.img; 
+            console.log('imgt.src', this.userinfo.img);
+            
+        }
     },
     watch: {
+        userinfo(val){
+            console.log('result userinfo change', val);
+            if(val.no) {
+                this.endCut(val.no);
+            }
+        },
     },
     mounted() {
-        this.takeScreenshot();
+        console.log('result mounted', this.userinfo);
+        if (this.userinfo.no) {
+            this.endCut(this.userinfo.no);
+        } else {
+            this.$router.push({ path: '/upload' });
+        }
         // console.log('mounted result');
         // const coverImg = new Image();
         // coverImg.src = this.userinfo.img;
@@ -133,6 +177,7 @@ $font_size : 108;
         height: 100%;
         background: #232b3a url('./images/bg.jpg') no-repeat;
         background-size: 100% auto;
+        pointer-events: none;
         &-note{
             position: absolute;
             width: rem(800);
@@ -145,8 +190,8 @@ $font_size : 108;
             position: absolute;
             width: rem(160);
             height: rem(160);
-            right: rem(35);
-            top: rem(1504);
+            right: rem(55);
+            top: rem(1490);
         }
         &-remind{
             position: absolute;

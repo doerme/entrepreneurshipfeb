@@ -115,8 +115,8 @@ export default {
                 no:no,
                 mobile:mobile,
                 sentence:sentence,
-                media_id: 'km3PbYGRq00SmQxZ0kSUPfJUC79hodkIKfx-GkcClTPBXyzms6RfvNUBDVSNByrK',
-                local_id: 'wxLocalResource://54366679475792' 
+                media_id: 'LX4JyzGVFr8fcllIByLUDkbgTTTMAkEEcKLNEDWONpUVtAWnHTCk9m7ERxFujPqH',
+                local_id: 'wxLocalResource://5437737139662783' 
             });
         },
         uploadwx() {
@@ -168,6 +168,7 @@ export default {
     },
     mounted() {
         this.$store.dispatch('setMyInfo');
+        console.log('dpr', $('html').data('dpr'));
     },
 };
 </script>

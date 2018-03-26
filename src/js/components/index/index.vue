@@ -4,17 +4,19 @@
       <IndexInfo></IndexInfo>
       <div class="index-bottom">
           <div class="index-bottom-bt">1号主管招募测试</div>
-          <img class="index-bottom-qrcode" src="./images/qrcode.png" />
+          <div class="index-bottom-qrcode js-qrdraw" ></div>
           <div class="index-bottom-remind">扫描二维码了解详细，帮我点赞</div>
       </div>
   </div>
 </template>
 
 <script>
+/* eslint-disable*/
 import { mapGetters } from 'vuex';
 import UserInfo from './userinfo.vue';
 import IndexInfo from './indexinfo.vue';
 import util from '../../public/lib/util.js';
+import qrcode from '../../public/lib/arale-qrcode.js';
 
 export default {
     created() {
@@ -42,6 +44,18 @@ export default {
     mounted() {
         if (util.getURLParam('no')) {
             this.$store.dispatch('setUserInfo');
+            let uri = null;
+            if(!/test/.test(window.location.href)){
+                uri = 'http://pingan.weixinlm.com/h5/wch/?no='+ util.getURLParam('no');
+            } else {
+                uri = 'http://test.weixinlm.com/h5/wch/?no=' + util.getURLParam('no');
+            }
+            const qrnode = new qrcode({
+                render: 'canvas',
+                size: 130,
+                text: uri
+            });
+            $('.js-qrdraw').html(qrnode);
         } else {
             this.$router.push({ path: '/upload' });
         }

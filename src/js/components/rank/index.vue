@@ -17,7 +17,6 @@
 
 <script>
 import { mapGetters } from 'vuex';
-
 // import util from '../../public/lib/util.js';
 
 export default {

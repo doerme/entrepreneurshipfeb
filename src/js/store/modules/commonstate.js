@@ -101,7 +101,10 @@ const actions = {
                 commit(types.setToastMsg, jdata.errmsg);
             } else {
                 commit(types.setDataUrl, acdata.localId);
-                commit(types.setUserInfo, jdata.data);
+                commit(types.setUserInfo, {
+                    ...jdata.data,
+                    no: acdata.no,
+                });
             }
         });
         

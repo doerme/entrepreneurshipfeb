@@ -1,8 +1,14 @@
 <template>
     <div class="indexinfowrap">
-        <video v-if="configdata && configdata.videos" class="indexinfowrap-v1 videounit" :src="configdata.videos[0]" ></video>
-        <video v-if="configdata && configdata.videos" class="indexinfowrap-v2 videounit" :src="configdata.videos[1]"></video>
-        <video v-if="configdata && configdata.videos" class="indexinfowrap-v3 videounit" :src="configdata.videos[2]"></video>
+        <a v-if="configdata && configdata.videos" class="indexinfowrap-v1 videounit" :href="configdata.videos[0]" >
+            <img class="indexinfowrap-cover" src="./images/video_cover1.jpg" />
+        </a>
+        <a v-if="configdata && configdata.videos" class="indexinfowrap-v2 videounit" :href="configdata.videos[1]">
+            <img class="indexinfowrap-cover" src="./images/video_cover2.jpg" />
+        </a>
+        <a v-if="configdata && configdata.videos" class="indexinfowrap-v3 videounit" :href="configdata.videos[2]">
+            <img class="indexinfowrap-cover" src="./images/video_cover3.jpg" />
+        </a>
         <div class="indexinfowrap-picline" v-if="configdata && configdata.pics">
             <img class="indexinfowrap-picline-unit" v-for="(item, index) in configdata.pics" v-bind:key="index" :src="item" />
         </div>
@@ -64,6 +70,7 @@ $font_size : 108;
         height: rem(200);
         white-space: nowrap;
         overflow-y: auto;
+        -webkit-overflow-scrolling : touch;
         &-unit{
             height: 100%;
             display: inline-block;
@@ -71,20 +78,32 @@ $font_size : 108;
         }
     }
     &-v1{
+        width: rem(375);
+        height: rem(260);
         right: rem(88);
         top: rem(180);
     }
     &-v2{
         right: rem(88);
         top: rem(680);
+        width: rem(375);
+        height: rem(225);
     }
     &-v3{
-
+        right: rem(88);
+        top: rem(1220);
+        width: rem(375);
+        height: rem(195);
     }
     .videounit{
         position: absolute;
         width: rem(378);
         height: rem(270);
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     }
 }
 </style>
