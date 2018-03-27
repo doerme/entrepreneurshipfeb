@@ -12,7 +12,11 @@
         <div class="indexinfowrap-picline" v-if="configdata && configdata.pics">
             <img class="indexinfowrap-picline-unit" v-for="(item, index) in configdata.pics" v-bind:key="index" :src="item" @click.stop="openimg(item)" />
         </div>
-        <baidu-map :center="center" :zoom="zoom" @ready="handler" class="bm-view"></baidu-map>
+        <baidu-map :center="center" :zoom="zoom" @ready="handler" class="bm-view">
+            <bm-marker :position="center" :dragging="false" animation="BMAP_ANIMATION_BOUNCE">
+                <bm-label content="上海新国际博览中心N1馆" :labelStyle="{color: 'red', fontSize : '24px'}" :offset="{width: -35, height: 30}"/>
+            </bm-marker>
+        </baidu-map>
     </div>
 </template>
 
