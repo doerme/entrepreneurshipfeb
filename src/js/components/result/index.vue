@@ -1,6 +1,8 @@
 <template>
     <div class="resultwrap">
         <div v-show="snapshowviewShow" class="snapshowview" id="snapshowview">
+            <img class="uploadimage" :src="userinfo.img" />
+            <img class="uploadimage-mask" src="./images/img_mask.png" />
             <div class="snapshowview-title">1号主管数据分析</div>
             <div class="snapshowview-percent">{{userinfo.data.zhuguanzhi.replace('%','')}}<span>%</span></div>
             <div class="snapshowview-subtitle">1号主管值</div>
@@ -14,9 +16,9 @@
             <div class="snapshowview-note">{{userinfo.sentence}}</div>
             <div class="snapshowview-qrcode js-qrdraw"></div>
             <div class="snapshowview-remind">扫描二维码了解详细，帮我点赞</div>
-            <img class="uploadimage" :src="userinfo.img" />
+            
         </div>
-        <img v-show="true" class="resultimg" :src="resultImgSrc" />
+        <img v-show="!snapshowviewShow" class="resultimg" :src="resultImgSrc" />
         <div class="takesnap-bt">长按保存我的数据</div>
     </div>
 </template>
@@ -52,11 +54,23 @@ export default {
             html2canvas(document.getElementById('snapshowview'), { // eslint-disable-line
                 useCORS: true,
                 logging: true,
+                foreignObjectRendering : true
             }).then((canvas) => {
-                document.body.appendChild(canvas);
-                self.resultImgSrc = canvas.toDataURL();
-                self.snapshowviewShow = true;
+                // document.body.appendChild(canvas);
+                const dataUrl = canvas.toDataURL('image/jpeg', 1.0);
+                console.log('dataUrl', dataUrl.substr(0, 100));
+                self.resultImgSrc = dataUrl;
+                self.snapshowviewShow = false;
             });
+            // html2canvas(document.getElementById('snapshowview'),{
+            //     useCORS : true,
+            //     foreignObjectRendering : true
+            // }).then(function(canvas){
+            //     const dataUrl = canvas.toDataURL();
+            //     // console.log('data uri', dataUrl);
+            //     self.resultImgSrc = dataUrl;
+            //     self.snapshowviewShow = false;
+            // });
         },
         endCut(no) {
             console.log('endCut', no);
@@ -101,7 +115,9 @@ export default {
     },
     mounted() {
         console.log('result mounted', this.userinfo);
-        if (this.userinfo.no) {
+        if(/testresult/.test(window.location.href)) {
+            this.endCut('00001');
+        } else if (this.userinfo.no) {
             this.endCut(this.userinfo.no);
         } else {
             this.$router.push({ path: '/upload' });
@@ -137,16 +153,27 @@ $font_size : 108;
         width: 100%;
         height: 100%;
         z-index: 8;
-        object-fit: contain;
+        object-fit: cover;
+        -webkit-user-select: auto;
+        -moz-user-select: auto;
+        -ms-user-select: auto;
+        user-select: auto;
+        z-index: 9;
     }
     .uploadimage{
         position: absolute;
-        width: rem(470);
-        height: rem(470);
+        width: rem(500);
+        height: rem(500);
         left: 50%;
         transform: translateX(-49%);
-        top: rem(482);
-        border-radius: 50%;
+        top: rem(470);
+    }
+    .uploadimage-mask{
+        position: absolute;
+        left: 0;
+        top: rem(255);
+        width: rem(1080);
+        height: rem(920);
     }
     .takesnap-bt{
         position: absolute;
@@ -163,6 +190,7 @@ $font_size : 108;
         border-radius: rem(40);
         top: rem(1385);
         pointer-events: none;
+        z-index: 9;
     }
     .pv{
         position: absolute;

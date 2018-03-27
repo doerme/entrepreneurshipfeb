@@ -1,6 +1,7 @@
 <script>
     import 'vue2-toast/lib/toast.css';
     import Toast from 'vue2-toast';
+    import BaiduMap from 'vue-baidu-map';
 
     import VueRouter from '../public/lib/vue-router.js';
     import IndexView from './index/index.vue';
@@ -10,6 +11,9 @@
     import ResultView from './result/index.vue';
     
     Vue.use(Toast);
+    Vue.use(BaiduMap, {
+        ak: 'RihCneS7fe7QPoGefPEWLgpX',
+    });
 
     const routes = [
         { path: '/', component: IndexView },
@@ -45,7 +49,7 @@
 <style lang="scss">
     body{
         margin: 0;
-        user-select: none;
+        // user-select: none;
     }
     .app{
         position: absolute;

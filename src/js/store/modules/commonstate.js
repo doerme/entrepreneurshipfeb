@@ -19,7 +19,7 @@ const state = {
         id: null,
         openid: null,
         mobile: null,
-        img: null,
+        img: null, //'./assets/js/components/result/images/test-6331f48a5f.jpg',
         no: null,
         name: null,
         zan: null,
@@ -32,6 +32,7 @@ const state = {
             yizhili: null,
             jineng: null,
             goutongnengli: null,
+            zhuguanzhi: '',
         },
     },
     rankList: [],
@@ -107,7 +108,6 @@ const actions = {
                 });
             }
         });
-        
     },
     setUserInfo({ commit }) {
         $.ajax({

@@ -26,6 +26,7 @@ export default {
         ...mapGetters({
             usersex: 'usersex',
             userinfo: 'userinfo',
+            toastmsg: 'toastmsg',
         }),
     },
     components: {
@@ -42,6 +43,10 @@ export default {
         userinfo(val) {
             console.log('loading userinfo change', val);
             this.$router.push({ path: '/result' });
+        },
+        toastmsg(val) {
+            this.$toast.center(val);
+            this.$router.push({ path: '/uploading' });
         },
     },
     mounted() {

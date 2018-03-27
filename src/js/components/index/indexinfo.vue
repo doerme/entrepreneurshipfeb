@@ -12,6 +12,7 @@
         <div class="indexinfowrap-picline" v-if="configdata && configdata.pics">
             <img class="indexinfowrap-picline-unit" v-for="(item, index) in configdata.pics" v-bind:key="index" :src="item" />
         </div>
+        <baidu-map :center="center" :zoom="zoom" @ready="handler" class="bm-view"></baidu-map>
     </div>
 </template>
 
@@ -26,7 +27,8 @@ export default {
     },
     data() {
         return {
-
+            center: { lng: 121.572045, lat: 31.219298 },
+            zoom: 3,
         };
     },
     computed: {
@@ -37,7 +39,12 @@ export default {
     components: {
     },
     methods: {
-
+        handler({ BMap, map }) {
+            console.log(BMap, map);
+            this.center.lng = 121.572045;
+            this.center.lat = 31.219298;
+            this.zoom = 16;
+        },
     },
     watch: {
 
@@ -55,7 +62,14 @@ $font_size : 108;
 @function rem($pixels){
     @return $pixels / $font_size + rem;
 }
-
+.bm-view{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: rem(2100);
+    width: rem(1010);
+    height: rem(560);
+}
 .indexinfowrap{
     position: relative;
     height: rem(2730);
