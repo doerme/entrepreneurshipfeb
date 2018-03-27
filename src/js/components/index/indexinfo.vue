@@ -10,7 +10,7 @@
             <img class="indexinfowrap-cover" src="./images/video_cover3.jpg" />
         </a>
         <div class="indexinfowrap-picline" v-if="configdata && configdata.pics">
-            <img class="indexinfowrap-picline-unit" v-for="(item, index) in configdata.pics" v-bind:key="index" :src="item" />
+            <img class="indexinfowrap-picline-unit" v-for="(item, index) in configdata.pics" v-bind:key="index" :src="item" @click.stop="openimg(item)" />
         </div>
         <baidu-map :center="center" :zoom="zoom" @ready="handler" class="bm-view"></baidu-map>
     </div>
@@ -44,6 +44,9 @@ export default {
             this.center.lng = 121.572045;
             this.center.lat = 31.219298;
             this.zoom = 16;
+        },
+        openimg(url) {
+            window.location.href = url;
         },
     },
     watch: {

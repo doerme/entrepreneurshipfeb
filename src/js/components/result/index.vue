@@ -75,7 +75,7 @@ export default {
         endCut(no) {
             console.log('endCut', no);
             let uri = null;
-            let dpi = 130;
+            let dpi = 180;
             if($('html').data('dpr') == 1){
                 dpi = dpi / 2;
             }
@@ -163,7 +163,6 @@ $font_size : 108;
     .uploadimage{
         position: absolute;
         width: rem(500);
-        height: rem(500);
         left: 50%;
         transform: translateX(-49%);
         top: rem(470);
@@ -177,19 +176,16 @@ $font_size : 108;
     }
     .takesnap-bt{
         position: absolute;
-        z-index: 8;
-        left: 50%;
-        transform: translateX(-50%);
-        width: rem(430);
-        height: rem(105);
-        text-align: center;
-        line-height: rem(105);
-        font-size: rem(36);
+        width: rem(590);
+        height: rem(110);
+        font-size: rem(48);
         color: #FFF;
-        background: #5574ff;
-        border-radius: rem(40);
-        top: rem(1385);
-        pointer-events: none;
+        text-align: center;
+        line-height: rem(110);
+        border-radius: rem(20);
+        background: #4295f3;
+        left: rem(129);
+        bottom: rem(150);
         z-index: 9;
     }
     .pv{
@@ -216,17 +212,15 @@ $font_size : 108;
         }
         &-qrcode{
             position: absolute;
-            width: rem(160);
-            height: rem(160);
-            right: rem(55);
-            top: rem(1490);
+            right: rem(50);
+            bottom: rem(50);
         }
         &-remind{
             position: absolute;
-            font-size: rem(12);
+            font-size: rem(30);
             color: #FFF;
-            right: rem(35);
-            top: rem(1690);
+            left: rem(213);
+            bottom: rem(80);
         }
         &-v1{
             top: rem(430);

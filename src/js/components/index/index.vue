@@ -52,7 +52,7 @@ export default {
             }
             const qrnode = new qrcode({
                 render: 'canvas',
-                size: 130,
+                size: 180,
                 text: uri
             });
             $('.js-qrdraw').html(qrnode);
@@ -82,7 +82,7 @@ $font_size : 108;
     height: rem(345);
     &-bt{
         position: absolute;
-        width: rem(680);
+        width: rem(590);
         height: rem(110);
         font-size: rem(48);
         color: #FFF;
@@ -90,23 +90,21 @@ $font_size : 108;
         line-height: rem(110);
         border-radius: rem(20);
         background: #4295f3;
-        left: rem(55);
-        bottom: rem(185);
+        left: rem(129);
+        bottom: rem(150);
     }
     &-qrcode{
         position: absolute;
-        width: rem(220);
-        height: rem(220);
-        right: rem(68);
-        bottom: rem(125);
+        right: rem(50);
+        bottom: rem(50);
 
     }
     &-remind{
         position: absolute;
         font-size: rem(30);
         color: #FFF;
-        right: rem(68);
-        bottom: rem(58);
+        left: rem(213);
+        bottom: rem(80);
     }
 }
 

@@ -36,6 +36,7 @@
         <div v-show="formshow" class="uploadwrap-form">
             <input type="text" maxlength="15" placeholder="输入您的姓名" ref="inputname" :value="myinfo.name" />
             <input type="tel" maxlength="10" placeholder="输入您的工号" ref="inputno" :value="myinfo.no"/>
+            <p class="uploadwrap-form-tips">*工号不能修改，请认真填写</p>
             <input type="tel" maxlength="13" placeholder="输入您的手机" ref="inputmobile" :value="myinfo.mobile"/>
             <textarea ref="inputsentence" placeholder="输入您的宣言" cols="30" rows="3" :value="myinfo.sentence"></textarea>
             <div class="uploadwrap-form-bt" @click.stop="uploadwx">
@@ -226,6 +227,13 @@ $font_size : 108;
         background: #232b3a;
         height: 90%;
         padding-top: 15%;
+        &-tips{
+            width: 100%;
+            text-align: center;
+            color: rgb(253, 108, 108);
+            font-size: rem(40);
+            margin-bottom: rem(80);
+        }
         &-bt{
             position: absolute;
             left: 50%;

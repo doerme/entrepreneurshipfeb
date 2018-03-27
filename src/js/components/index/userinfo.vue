@@ -1,49 +1,49 @@
 <template>
-  <div class="userinfowrap">
-      <img class="userinfowrap-userface" :src="userinfo.img" />
-      <img class="userinfowrap-q1 quan" src="./images/quan1.png" />
-      <img class="userinfowrap-q2 quan" src="./images/quan2.png" />
-      <img class="userinfowrap-q3 quan" src="./images/quan3.png" />
-      <img class="userinfowrap-q4 quan" src="./images/quan4.png" />
-      <img class="userinfowrap-remind" src="./images/top_remind.png" />
-      <div class="userinfowrap-note">
-          <p>我是：<span>{{userinfo.name}}</span>, 我在这里等您</p>
-          <p>工号：<span>{{userinfo.no}}</span> 手机号：<span>{{userinfo.mobile}}</span></p>
-      </div>
-      <div class="userinfowrap-table">
-          <img class="userinfowrap-table-title" src="./images/table-title.png" />
-          <table class="userinfowrap-table-main">
-              <tr>
-                  <td>{{userinfo.data.xuexinengli}}</td>
-                  <td>{{userinfo.data.zixinxin}}</td>
-                  <td>{{userinfo.data.zhixingli}}</td>
-                  <td>{{userinfo.data.chuangxin}}</td>
-                  <td>{{userinfo.data.yizhili}}</td>
-                  <td>{{userinfo.data.goutongnengli}}</td>
-                  <td>{{userinfo.data.jineng}}</td>
-              </tr>
-              <tr>
-                  <td>学习能力</td>
-                  <td>自信心</td>
-                  <td>执行力</td>
-                  <td>创新</td>
-                  <td>意志力</td>
-                  <td>沟通能力</td>
-                  <td>技能</td>
-              </tr>
-          </table>
-          <div class="userinfowrap-table-value">1号主管值 {{userinfo.data.zhuguanzhi}}</div>
-          <div class="userinfowrap-table-subvalue">
-              <p>{{userinfo.name}}，你的自信心爆表，2018创业</p>
-              <p>会找的就是你，加入我们吧！</p>
-          </div>
-          <div class="userinfowrap-table-btwrap">
-              <div @click.stop="addZan" class="bt-like">{{userinfo.zan}}</div>
-              <router-link class="bt-left" to="/rank">明星排行榜</router-link>
-              <router-link class="bt-right" to="/upload">我也要玩</router-link>
-          </div>
-      </div>
-  </div>
+    <div class="userinfowrap">
+        <img class="userinfowrap-userface" :src="userinfo.img" />
+        <img class="userinfowrap-q1 quan" src="./images/quan1.png" />
+        <img class="userinfowrap-q2 quan" src="./images/quan2.png" />
+        <img class="userinfowrap-q3 quan" src="./images/quan3.png" />
+        <img class="userinfowrap-q4 quan" src="./images/quan4.png" />
+        <img class="userinfowrap-remind" src="./images/top_remind.png" />
+        <div class="userinfowrap-note">
+            <p>我是：<span>{{userinfo.name}}</span>, 我在这里等您</p>
+            <p>工号：<span>{{userinfo.no}}</span> 手机号：<span>{{userinfo.mobile}}</span></p>
+            <p>2018年一季度晋升表彰会暨1号计划万人创业论坛</p>
+        </div>
+        <div class="userinfowrap-table">
+            <img class="userinfowrap-table-title" src="./images/table-title.png" />
+            <table class="userinfowrap-table-main">
+                <tr>
+                    <td>{{userinfo.data.xuexinengli}}</td>
+                    <td>{{userinfo.data.zixinxin}}</td>
+                    <td>{{userinfo.data.zhixingli}}</td>
+                    <td>{{userinfo.data.chuangxin}}</td>
+                    <td>{{userinfo.data.yizhili}}</td>
+                    <td>{{userinfo.data.goutongnengli}}</td>
+                    <td>{{userinfo.data.jineng}}</td>
+                </tr>
+                <tr>
+                    <td>学习能力</td>
+                    <td>自信心</td>
+                    <td>执行力</td>
+                    <td>创新</td>
+                    <td>意志力</td>
+                    <td>沟通能力</td>
+                    <td>技能</td>
+                </tr>
+            </table>
+            <div class="userinfowrap-table-value">1号主管值 {{userinfo.data.zhuguanzhi}}</div>
+            <div class="userinfowrap-table-subvalue">
+                <p>{{userinfo.sentence}}</p>
+            </div>
+            <div class="userinfowrap-table-btwrap">
+                <div @click.stop="addZan" class="bt-like">{{userinfo.zan}}</div>
+                <router-link class="bt-left" to="/rank">明星排行榜</router-link>
+                <router-link class="bt-right" to="/upload">我也要玩</router-link>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -203,11 +203,11 @@ $font_size : 108;
         position: absolute;
         width: 100%;
         left: 0;
-        top: rem(880);
+        top: rem(860);
         text-align: center;
         p{
-            height: rem(55);
-            line-height: rem(55);
+            height: rem(35);
+            line-height: rem(35);
             font-size: rem(42);
             color: #FFF;
             span{
