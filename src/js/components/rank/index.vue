@@ -1,7 +1,7 @@
 <template>
     <div class="rankwrap">
         <div class="user-avatar" v-if="rankList.length > 0">
-            <img class="user-avatar-main" :src="rankList[0].img" />
+            <div class="user-avatar-main" :style="'background-image:url('+rankList[0].img+');background-size:contain;background-position:center center;background-repeat:no-repeat;background-color:#2169ab;'"></div>
         </div>
         <div v-if="rankList.length > 0" class="user-likenum"><span>{{rankList[0].name}}</span> <span>{{rankList[0].zan}}赞</span></div>
         <ul class="rank-list">
@@ -117,6 +117,7 @@ $font_size : 108;
             width: rem(316);
             height: rem(316);
             border-radius: 50%;
+            object-fit: contain;
         }
     }
     .user-likenum{
