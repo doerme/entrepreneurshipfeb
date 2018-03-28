@@ -229,9 +229,9 @@ $font_size : 108;
         left: 50%;
         top: rem(120);
         margin-left: rem(-650/2);
-        background: #03a8eb;
+        background: #2169ab;
         border-radius: 50%;
-        object-fit: cover;
+        object-fit: contain;
     }
     .quan{
         position: absolute;

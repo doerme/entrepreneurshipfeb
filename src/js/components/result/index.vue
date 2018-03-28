@@ -1,7 +1,7 @@
 <template>
     <div class="resultwrap">
         <div v-show="snapshowviewShow" class="snapshowview" id="snapshowview">
-            <div class="uploadimage-wrap" :style="'background-image:url('+userinfo.img+');background-size:cover;'"></div>
+            <div class="uploadimage-wrap" :style="'background-image:url('+userinfo.img+');background-size:contain;background-position:center center;background-repeat:no-repeat;background-color:#2169ab;'"></div>
             <img class="uploadimage-mask" src="./images/img_mask.png" />
             <div class="snapshowview-title">1号主管数据分析</div>
             <div class="snapshowview-percent">{{userinfo.data.zhuguanzhi.replace('%','')}}<span>%</span></div>
@@ -162,11 +162,11 @@ $font_size : 108;
     }
     .uploadimage-wrap{
         position: absolute;
-        width: rem(600);
-        height: rem(600);
+        width: rem(500);
+        height: rem(500);
         left: 50%;
         transform: translateX(-49%);
-        top: rem(420);
+        top: rem(460);
         overflow: hidden;
     }
     .uploadimage{
