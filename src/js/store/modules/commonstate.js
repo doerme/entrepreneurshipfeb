@@ -35,6 +35,7 @@ const state = {
             zhuguanzhi: '',
         },
     },
+    loadingname: null,
     rankList: [],
     configdata: null,
 };
@@ -49,10 +50,14 @@ const getters = {
     rankList: stateData => stateData.rankList,
     myinfo: stateData => stateData.myinfo,
     configdata: stateData => stateData.configdata,
+    loadingname: stateData => stateData.loadingname,
 };
 
 // actions
 const actions = {
+    setLoadingname({ commit }, acdata){
+        commit(types.setLoadingname, acdata);
+    },
     setConfig({ commit }){
         $.ajax({
             url: `${apiurl}addons/api/Millionbusinessforum/share_config`,
@@ -136,6 +141,10 @@ const actions = {
 
 // mutations
 const mutations = {
+    [types.setLoadingname](stateData, acdata) {
+        const stateNew = stateData;
+        stateNew.loadingname = acdata;
+    },
     [types.setConfig](stateData, acdata) {
         const stateNew = stateData;
         stateNew.configdata = acdata;

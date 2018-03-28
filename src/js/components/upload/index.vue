@@ -127,6 +127,7 @@ export default {
             const no = self.$refs.inputno.value;
             const mobile = self.$refs.inputmobile.value;
             const sentence = self.$refs.inputsentence.value;
+            self.$store.dispatch('setLoadingname', inputname);
             if(inputname.length < 1) {
                 this.$toast.center('请输入您的姓名');
                 return;
@@ -218,6 +219,7 @@ $font_size : 108;
     position: absolute;
     width: 100%;
     height: 100%;
+    min-height: rem(1500);
     left: 0;
     top: 0;
     background: #090e30 url('./images/upload_bg.jpg') no-repeat;

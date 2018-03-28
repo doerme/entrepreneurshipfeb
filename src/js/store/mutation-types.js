@@ -7,3 +7,4 @@ export const setUserInfo = 'setUserInfo';
 export const setMyInfo = 'setMyInfo';
 export const setRankList = 'setRankList';
 export const setConfig = 'setConfig';
+export const setLoadingname = 'setLoadingname';

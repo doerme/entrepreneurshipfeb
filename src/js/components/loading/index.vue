@@ -1,6 +1,6 @@
 <template>
   <div class="loadingwrap">
-      <div class="loadingwrap-nick">{{userinfo.name}}</div>
+      <div class="loadingwrap-nick">{{loadingname}}</div>
       <div class="loadingwrap-remind">1号主管值正在加速检测中.....</div>
       <img v-show="usersex === 1" class="loadingwrap-main-male" src="./images/male.png" />
       <img v-show="usersex === 2" class="loadingwrap-main-female" src="./images/female.png" />
@@ -27,6 +27,7 @@ export default {
             usersex: 'usersex',
             userinfo: 'userinfo',
             toastmsg: 'toastmsg',
+            loadingname: 'loadingname',
         }),
     },
     components: {
