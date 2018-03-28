@@ -19,7 +19,7 @@ const state = {
         id: null,
         openid: null,
         mobile: null,
-        img: null, //'./assets/js/components/result/images/test-6331f48a5f.jpg',
+        img: './assets/data/img/test.jpg', //'./assets/js/components/result/images/test-6331f48a5f.jpg',
         no: null,
         name: null,
         zan: null,
