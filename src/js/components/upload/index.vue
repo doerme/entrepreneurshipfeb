@@ -35,8 +35,9 @@
         </transition-group>
         <div v-show="formshow" class="uploadwrap-form">
             <input type="text" maxlength="15" placeholder="输入您的姓名" ref="inputname" :value="myinfo.name" />
-            <input type="tel" maxlength="10" placeholder="输入您的工号" ref="inputno" :value="myinfo.no"/>
-            <p class="uploadwrap-form-tips">*工号不能修改，请认真填写</p>
+            <p v-if="myinfo.no" class="uploadwrap-form-tips" >工号：{{myinfo.no}}</p>
+            <input v-show="!myinfo.no" type="tel" maxlength="10" placeholder="输入您的工号" ref="inputno" :value="myinfo.no"/>
+            <p v-if="!myinfo.no" class="uploadwrap-form-tips">*工号不能修改，请认真填写</p>
             <input type="tel" maxlength="13" placeholder="输入您的手机" ref="inputmobile" :value="myinfo.mobile"/>
             <textarea ref="inputsentence" placeholder="输入您的宣言" cols="30" rows="3" :value="myinfo.sentence"></textarea>
             <div class="uploadwrap-form-bt" @click.stop="uploadwx">
@@ -101,7 +102,7 @@ export default {
             if(inputname.length < 1) {
                 this.$toast.center('请输入您的姓名');
                 return;
-            }else if(no.length < 1) {
+            }else if(no.length < 1 && !self.myinfo.no) {
                 this.$toast.center('请输入您的工号');
                 return;
             }else if(mobile.length < 1 || !(/^1[0-9]{10}$/.test(mobile))){
@@ -113,7 +114,7 @@ export default {
             }
             self.$store.dispatch('setDataUrl', {
                 name:inputname,
-                no:no,
+                no:self.myinfo || no,
                 mobile:mobile,
                 sentence:sentence,
                 media_id: 'LX4JyzGVFr8fcllIByLUDkbgTTTMAkEEcKLNEDWONpUVtAWnHTCk9m7ERxFujPqH',

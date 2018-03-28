@@ -14,8 +14,10 @@
         </div>
         <baidu-map :center="center" :zoom="zoom" @ready="handler" class="bm-view">
             <bm-marker :position="center" :dragging="false" animation="BMAP_ANIMATION_BOUNCE">
-                <bm-label content="上海新国际博览中心N1馆" :labelStyle="{color: 'red', fontSize : '24px'}" :offset="{width: -35, height: 30}"/>
+                <bm-label content="上海新国际博览中心N1馆"  :offset="{width: -35, height: 30}"/>
             </bm-marker>
+            <bm-driving v-if="startPoint && endPoint" :start="startPoint" :end="endPoint" :autoViewport="true">
+            </bm-driving>
         </baidu-map>
     </div>
 </template>
@@ -33,6 +35,8 @@ export default {
         return {
             center: { lng: 121.572045, lat: 31.219298 },
             zoom: 3,
+            startPoint: null,
+            endPoint: null,
         };
     },
     computed: {
@@ -45,12 +49,39 @@ export default {
     methods: {
         handler({ BMap, map }) {
             console.log(BMap, map);
-            this.center.lng = 121.572045;
-            this.center.lat = 31.219298;
             this.zoom = 16;
+            this.initstartend();
         },
         openimg(url) {
             window.location.href = url;
+        },
+        initstartend() {
+            const self = this;
+            window.afterWxGetLocation = function (res) {
+                self.startPoint = new BMap.Point(res.longitude,res.latitude); // eslint-disable-line
+                self.endPoint = new BMap.Point(121.572045, 31.219298); // eslint-disable-line
+            };
+            setTimeout(() => {
+                wxGetLocation(); // eslint-disable-line
+            }, 3000);
+
+
+            // if (navigator.geolocation) {
+            //     navigator.geolocation.getCurrentPosition(
+            //         (position) => {
+            //             const longitude = position.coords.longitude;
+            //             const latitude = position.coords.latitude;
+            //             console.log('geolocation 1', longitude, latitude);
+            //         this.startPoint = new BMap.Point(longitude, latitude); // eslint-disable-line
+            //         this.endPoint = new BMap.Point(121.572045, 31.219298); // eslint-disable-line
+            //         },
+            //         (e) => {
+            //             const msg = e.code;
+            //             const dd = e.message;
+            //             console.log('geolocation 1', msg, dd);
+            //         },
+            //     );
+            // }
         },
     },
     watch: {
@@ -69,6 +100,7 @@ $font_size : 108;
 @function rem($pixels){
     @return $pixels / $font_size + rem;
 }
+
 .bm-view{
     position: absolute;
     left: 50%;
@@ -76,6 +108,7 @@ $font_size : 108;
     top: rem(2100);
     width: rem(1010);
     height: rem(560);
+    overflow: hidden;
 }
 .indexinfowrap{
     position: relative;
@@ -83,6 +116,7 @@ $font_size : 108;
     width: 100%;
     background: url('./images/content_wrap_bg.jpg') no-repeat;
     background-size: 100% auto; 
+    overflow: hidden;
     &-picline{
         position: absolute;
         top: rem(1670);

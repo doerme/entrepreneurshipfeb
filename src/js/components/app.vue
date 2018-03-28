@@ -67,7 +67,12 @@
             transform: translateX(-50%);
         }
     }
-
+    [data-dpr="3"] .BMapLabel{
+        transform: scale(3);
+    }
+    [data-dpr="2"] .BMapLabel{
+        transform: scale(2);
+    }
     [data-dpr="3"] div.lx-toast{
         transform: scale(3) translate(-20%,-50%);
     }

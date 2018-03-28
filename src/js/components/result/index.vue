@@ -182,11 +182,13 @@ $font_size : 108;
         color: #FFF;
         text-align: center;
         line-height: rem(110);
-        border-radius: rem(20);
+        border-radius: rem(40);
         background: #4295f3;
-        left: rem(129);
-        bottom: rem(150);
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: rem(350);
         z-index: 9;
+        pointer-events: none;
     }
     .pv{
         position: absolute;

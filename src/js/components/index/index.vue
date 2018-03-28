@@ -50,9 +50,16 @@ export default {
             } else {
                 uri = 'http://test.weixinlm.com/h5/wch/?no=' + util.getURLParam('no');
             }
+            let dpi = 180;
+            if($('html').data('dpr') == 1){
+                dpi = dpi / 2;
+            }
+            if($('html').data('dpr') == 3){
+                dpi = dpi / 2 * 3;
+            }
             const qrnode = new qrcode({
                 render: 'canvas',
-                size: 180,
+                size: dpi,
                 text: uri
             });
             $('.js-qrdraw').html(qrnode);
@@ -88,7 +95,7 @@ $font_size : 108;
         color: #FFF;
         text-align: center;
         line-height: rem(110);
-        border-radius: rem(20);
+        border-radius: rem(40);
         background: #4295f3;
         left: rem(129);
         bottom: rem(150);
